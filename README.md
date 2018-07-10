@@ -61,10 +61,20 @@ python motion_planning.py --lat_goal <lat> --lon_goal <lon> --alt_goal <alt>
 ```
 The defult values are: lat = ?, log = ?, alt = ?.
 
-### Modify A* to include diagonal motion (or replace A* altogether)
-Minimal requirement here is to modify the code in planning_utils() to update the A* implementation to include diagonal motions on the grid that have a cost of sqrt(2), but more creative solutions are welcome. Explain the code you used to accomplish this step.
+### A* search with diagonal motion ###
+In `planning_utils.py`, the following was added to `valid_actions()` function after adding new action to `Action()` enum class to include diagonal motions on the grid that have a cost of sqrt(2)
+```py
+    if x + 1 > n or y + 1 > m or grid[x + 1, y + 1] == 1:
+        valid_actions.remove(Action.SOUTH_EAST)
+    if x - 1 < 0 or y + 1 > m or grid[x - 1, y + 1] == 1:
+        valid_actions.remove(Action.NORTH_EAST)
+    if x + 1 > n or y - 1 < 0 or grid[x + 1, y - 1] == 1:
+        valid_actions.remove(Action.SOUTH_WEST)
+    if x - 1 < 0 or y - 1 < 0 or grid[x - 1, y - 1] == 1:
+        valid_actions.remove(Action.NORTH_WEST)
+```
 
-### 6. Cull waypoints 
+### Cull waypoints ###
 For this step you can use a collinearity test or ray tracing method like Bresenham. The idea is simply to prune your path of unnecessary waypoints. Explain the code you used to accomplish this step.
 
 
