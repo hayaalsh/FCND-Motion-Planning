@@ -55,11 +55,10 @@ local_goal_north, local_goal_east, _ = global_to_local(self.global_goal_position
 grid_goal = (int(np.ceil(local_goal_north - north_offset)), int(np.ceil(local_goal_east - east_offset)))
 ```
 
-To run the code, you need to determin the goal position or else defult values will be used.
+To run the code, you need to determin the goal position or else defult values of lat = ?, log = ?, alt = ? will be used.
 ```
 python motion_planning.py --lat_goal <lat> --lon_goal <lon> --alt_goal <alt>
 ```
-The defult values are: lat = ?, log = ?, alt = ?.
 
 ### A* search with diagonal motion ###
 In `planning_utils.py`, the following was added to `valid_actions()` function after adding new action to `Action()` enum class to include diagonal motions on the grid that have a cost of sqrt(2)
@@ -75,7 +74,36 @@ In `planning_utils.py`, the following was added to `valid_actions()` function af
 ```
 
 ### Cull waypoints ###
-For this step you can use a collinearity test or ray tracing method like Bresenham. The idea is simply to prune your path of unnecessary waypoints. Explain the code you used to accomplish this step.
+Collinearity test was applied on the oprained path to prune it from unnecessary waypoints.
+
+```py
+def prune_path(path, epsilon=1e-5):
+    """
+    Returns prune path.
+    """
+    def point(p):
+        return np.array([p[0], p[1], 1.]).reshape(1, -1)
+
+    def collinearity_check(p1, p2, p3):   
+        m = np.concatenate((p1, p2, p3), 0)
+        det = np.linalg.det(m)
+        return abs(det) < epsilon
+
+    pruned_path = [p for p in path]
+    
+    i = 0
+    while i < len(pruned_path) - 2:
+        p1 = point(pruned_path[i])
+        p2 = point(pruned_path[i+1])
+        p3 = point(pruned_path[i+2])
+
+        if collinearity_check(p1, p2, p3):
+            pruned_path.remove(pruned_path[i+1])
+        else:
+            i += 1
+
+    return pruned_path
+```
 
 
 
