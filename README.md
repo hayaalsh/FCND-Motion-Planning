@@ -43,12 +43,19 @@ local_north, local_east, local_down = global_to_local(self.global_position, self
 ```
 
 ### Set grid start position from local position ###
-This is another step in adding flexibility to the start location. As long as it works you're good to go!
+The start location on the grid was set to the current local positin using:
+```py
+grid_start = (int(np.ceil(local_north - north_offset)), int(np.ceil(local_east - east_offset)))
+```
 
-### 4. Set grid goal position from geodetic coords
-This step is to add flexibility to the desired goal location. Should be able to choose any (lat, lon) within the map and have it rendered to a goal location on the grid.
+### Set grid goal position from geodetic coords ###
+Goal position was also converted from global to local frame and was adjusted on the grid. 
+```py
+local_goal_north, local_goal_east, _ = global_to_local(self.global_goal_position, self.global_home)
+grid_goal = (int(np.ceil(local_goal_north - north_offset)), int(np.ceil(local_goal_east - east_offset)))
+```
 
-### 5. Modify A* to include diagonal motion (or replace A* altogether)
+### Modify A* to include diagonal motion (or replace A* altogether)
 Minimal requirement here is to modify the code in planning_utils() to update the A* implementation to include diagonal motions on the grid that have a cost of sqrt(2), but more creative solutions are welcome. Explain the code you used to accomplish this step.
 
 ### 6. Cull waypoints 

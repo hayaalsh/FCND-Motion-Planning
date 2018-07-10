@@ -141,13 +141,18 @@ class MotionPlanning(Drone):
         # Define a grid for a particular altitude and safety margin around obstacles
         grid, north_offset, east_offset = create_grid(data, TARGET_ALTITUDE, SAFETY_DISTANCE)
         print("North offset = {0}, east offset = {1}".format(north_offset, east_offset))
+
         # Define starting point on the grid (this is just grid center)
         grid_start = (-north_offset, -east_offset)
+
         # TODO: convert start position to current position rather than map center
-        
+        grid_start = (int(np.ceil(local_north - north_offset)), int(np.ceil(local_east - east_offset)))
+
         # Set goal as some arbitrary position on the grid
         grid_goal = (-north_offset + 10, -east_offset + 10)
         # TODO: adapt to set goal as latitude / longitude position and convert
+        local_goal_north, local_goal_east, _ = global_to_local(self.global_goal_position, self.global_home)
+        grid_goal = (int(np.ceil(local_goal_north - north_offset)), int(np.ceil(local_goal_east - east_offset)))
 
         # Run A* to find a path from start to goal
         # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
