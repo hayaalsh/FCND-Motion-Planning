@@ -1,24 +1,7 @@
-## Project: 3D Motion Planning
-![Quad Image](./misc/enroute.png)
-
----
-
-
-# Required Steps for a Passing Submission:
-1. Load the 2.5D map in the colliders.csv file describing the environment.
-2. Discretize the environment into a grid or graph representation.
-3. Define the start and goal locations.
-4. Perform a search using A* or other search algorithm.
-5. Use a collinearity test or ray tracing method (like Bresenham) to remove unnecessary waypoints.
-6. Return waypoints in local ECEF coordinates (format for `self.all_waypoints` is [N, E, altitude, heading], where the drone’s start location corresponds to [0, 0, 0, 0].
-7. Write it up.
-8. Congratulations!  Your Done!
-
-
 # FCND Project 2: Motion Planning #
 This is the readme for the python motion planning project for FCND course offered by Udacity. The file include all the rubric points and how they were addressed and specifically where in the code each step was handled.
 More details about the project devoloped by Udacity, contributors, and licensing, can be found [here](../master/README_Udacity.md).
-
+![Quad Image](./misc/enroute.png)
 
 ## Starter Code ##
 
@@ -70,5 +53,22 @@ It works!
 # Extra Challenges: Real World Planning
 
 For an extra challenge, consider implementing some of the techniques described in the "Real World Planning" lesson. You could try implementing a vehicle model to take dynamic constraints into account, or implement a replanning method to invoke if you get off course or encounter unexpected obstacles.
+
+
+## Project: 3D Motion Planning
+
+
+---
+
+
+# Required Steps for a Passing Submission:
+1. Load the 2.5D map in the colliders.csv file describing the environment.
+2. Discretize the environment into a grid or graph representation.
+3. Define the start and goal locations.
+4. Perform a search using A* or other search algorithm.
+5. Use a collinearity test or ray tracing method (like Bresenham) to remove unnecessary waypoints.
+6. Return waypoints in local ECEF coordinates (format for `self.all_waypoints` is [N, E, altitude, heading], where the drone’s start location corresponds to [0, 0, 0, 0].
+7. Write it up.
+8. Congratulations!  Your Done!
 
 
