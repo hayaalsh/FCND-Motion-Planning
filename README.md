@@ -1,6 +1,7 @@
 # FCND Project 2: Motion Planning #
 This is the readme for the python motion planning project for FCND course offered by Udacity. The file include all the rubric points and how they were addressed and specifically where in the code each step was handled.
 More details about the project devoloped by Udacity, contributors, and licensing, can be found [here](../master/README_Udacity.md).
+
 ![Quad Image](./misc/enroute.png)
 
 ## Starter Code ##
@@ -16,21 +17,32 @@ More details about the project devoloped by Udacity, contributors, and licensing
 
 ## Path Planning Algorithm ##
 
-### 1. Set your global home position
-Here students should read the first line of the csv file, extract lat0 and lon0 as floating point values and use the self.set_home_position() method to set global home. Explain briefly how you accomplished this in your code.
+### Global home position ###
+After reading the first line of the csv file, `lat0` and `lon0` were extracted as floating point values and were used to set the global home position using `self.set_home_position()`. 
 
+```py
+# read lat0, lon0 from colliders into floating point values
+header = open('colliders.csv').readline()
+s = re.findall(r"[-+]?\d*\.\d+|\d+", header)
+lat0 = float(s[1])
+lon0 = float(s[2])
 
-And here is a lovely picture of our downtown San Francisco environment from above!
-![Map of SF](./misc/map.png)
+# set home position to (lon0, lat0, 0)
+self.set_home_position(lon0, lat0, 0)
 
-### 2. Set your current local position
-Here as long as you successfully determine your local position relative to global home you'll be all set. Explain briefly how you accomplished this in your code.
+# retrieve current global position
+print('current global home: x = %.2f, y = %0.2f, z = %0.2f' % (self.global_position[0],self.global_position[1],self.global_position[2]))
 
+```
 
-Meanwhile, here's a picture of me flying through the trees!
-![Forest Flying](./misc/in_the_trees.png)
+### Set current local position ###
+The local position was determined relative to global home using the `global_to_local()` function.
 
-### 3. Set grid start position from local position
+```py
+local_north, local_east, local_down = global_to_local(self.global_position, self.global_home)
+```
+
+### Set grid start position from local position ###
 This is another step in adding flexibility to the start location. As long as it works you're good to go!
 
 ### 4. Set grid goal position from geodetic coords

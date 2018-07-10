@@ -11,6 +11,7 @@ from udacidrone.connection import MavlinkConnection
 from udacidrone.messaging import MsgID
 from udacidrone.frame_utils import global_to_local
 
+import re
 
 class States(Enum):
     MANUAL = auto()
@@ -120,17 +121,20 @@ class MotionPlanning(Drone):
         self.target_position[2] = TARGET_ALTITUDE
 
         # TODO: read lat0, lon0 from colliders into floating point values
-        lat0, lon0 = read_global_home(colliders_fname)
+        header = open('colliders.csv').readline()
+        s = re.findall(r"[-+]?\d*\.\d+|\d+", header)
+        lat0 = float(s[1])
+        lon0 = float(s[2])
 
         # TODO: set home position to (lon0, lat0, 0)
         self.set_home_position(lon0, lat0, 0)
 
         # TODO: retrieve current global position
- 
+        print('current global home: x = %.2f, y = %0.2f, z = %0.2f' % (self.global_position[0],self.global_position[1],self.global_position[2]))
+
         # TODO: convert to current local position using global_to_local()
-        
-        print('global home {0}, position {1}, local position {2}'.format(self.global_home, self.global_position,
-                                                                         self.local_position))
+        local_north, local_east, local_down = global_to_local(self.global_position, self.global_home)
+
         # Read in obstacle map
         data = np.loadtxt('colliders.csv', delimiter=',', dtype='Float64', skiprows=2)
         
