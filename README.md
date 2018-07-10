@@ -14,7 +14,7 @@ More details about the project devoloped by Udacity, contributors, and licensing
 3) Call `a_star()` to find a path from starting point to destination.
 4) Produce waypoints from the found path in the previous step and send them to drone using `send_waypoints()`.
 
---
+---
 
 ## Path Planning Algorithm ##
 ### Global home position ###
