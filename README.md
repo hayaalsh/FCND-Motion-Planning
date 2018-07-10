@@ -49,11 +49,17 @@ grid_start = (int(np.ceil(local_north - north_offset)), int(np.ceil(local_east -
 ```
 
 ### Set grid goal position from geodetic coords ###
-Goal position was also converted from global to local frame and was adjusted on the grid. 
+Goal position specified by the user through the command line was also converted from global to local frame and was mapped on the grid. 
 ```py
 local_goal_north, local_goal_east, _ = global_to_local(self.global_goal_position, self.global_home)
 grid_goal = (int(np.ceil(local_goal_north - north_offset)), int(np.ceil(local_goal_east - east_offset)))
 ```
+
+To run the code, you need to determin the goal position or else defult values will be used.
+```
+python motion_planning.py --lat_goal <lat> --lon_goal <lon> --alt_goal <alt>
+```
+The defult values are: lat = ?, log = ?, alt = ?.
 
 ### Modify A* to include diagonal motion (or replace A* altogether)
 Minimal requirement here is to modify the code in planning_utils() to update the A* implementation to include diagonal motions on the grid that have a cost of sqrt(2), but more creative solutions are welcome. Explain the code you used to accomplish this step.
