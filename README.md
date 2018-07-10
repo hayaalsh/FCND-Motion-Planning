@@ -105,7 +105,7 @@ def prune_path(path, epsilon=1e-5):
     return pruned_path
 ```
 
-
+---
 ## Execute the flight ##
 To test the code, we tried starting points and destinations. The A* search was able to find a path if exist. Both resulting path ploted on the 2.5D map and the simulator execution for different senarios are shown below.  
 
