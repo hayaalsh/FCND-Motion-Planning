@@ -120,8 +120,10 @@ class MotionPlanning(Drone):
         self.target_position[2] = TARGET_ALTITUDE
 
         # TODO: read lat0, lon0 from colliders into floating point values
-        
+        lat0, lon0 = read_global_home(colliders_fname)
+
         # TODO: set home position to (lon0, lat0, 0)
+        self.set_home_position(lon0, lat0, 0)
 
         # TODO: retrieve current global position
  
