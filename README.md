@@ -16,7 +16,6 @@ More details about the project devoloped by Udacity, contributors, and licensing
 
 
 ## Path Planning Algorithm ##
-
 ### Global home position ###
 After reading the first line of the csv file, `lat0` and `lon0` were extracted as floating point values and were used to set the global home position using `self.set_home_position()`. 
 
@@ -74,7 +73,7 @@ In `planning_utils.py`, the following was added to `valid_actions()` function af
 ```
 
 ### Cull waypoints ###
-Collinearity test was applied on the oprained path to prune it from unnecessary waypoints.
+Collinearity test, `prune_path()`, was applied on the optained path to prune it from unnecessary waypoints.
 
 ```py
 def prune_path(path, epsilon=1e-5):
@@ -106,32 +105,13 @@ def prune_path(path, epsilon=1e-5):
 ```
 
 
+## Execute the flight ##
+This is simply a check on whether it all worked. Send the waypoints and the autopilot should fly you from start to goal!
 
-### Execute the flight
-#### 1. Does it work?
-It works!
-
-### Double check that you've met specifications for each of the [rubric](https://review.udacity.com/#!/rubrics/1534/view) points.
-  
-# Extra Challenges: Real World Planning
-
-For an extra challenge, consider implementing some of the techniques described in the "Real World Planning" lesson. You could try implementing a vehicle model to take dynamic constraints into account, or implement a replanning method to invoke if you get off course or encounter unexpected obstacles.
-
-
-## Project: 3D Motion Planning
-
-
----
-
+At the moment there is some mismatch between the colliders map and actual buildings in the scene. To ensure success build in a 5+ m safety margin around obstacles. Try some different goal locations. Also try starting from a different point in the city. Your reviewer will also try some random locations so be sure to test your solution! There is no firm constraint or requirement on how accurately you land exactly on the goal location. Just so long as your planner functions as expected.
 
 # Required Steps for a Passing Submission:
 1. Load the 2.5D map in the colliders.csv file describing the environment.
-2. Discretize the environment into a grid or graph representation.
-3. Define the start and goal locations.
-4. Perform a search using A* or other search algorithm.
-5. Use a collinearity test or ray tracing method (like Bresenham) to remove unnecessary waypoints.
 6. Return waypoints in local ECEF coordinates (format for `self.all_waypoints` is [N, E, altitude, heading], where the drone’s start location corresponds to [0, 0, 0, 0].
-7. Write it up.
-8. Congratulations!  Your Done!
 
 
