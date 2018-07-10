@@ -14,6 +14,7 @@ More details about the project devoloped by Udacity, contributors, and licensing
 3) Call `a_star()` to find a path from starting point to destination.
 4) Produce waypoints from the found path in the previous step and send them to drone using `send_waypoints()`.
 
+--
 
 ## Path Planning Algorithm ##
 ### Global home position ###
@@ -24,7 +25,7 @@ After reading the first line of the csv file, `lat0` and `lon0` were extracted a
 header = open('colliders.csv').readline()
 s = re.findall(r"[-+]?\d*\.\d+|\d+", header)
 lat0 = float(s[1])
-lon0 = float(s[2])
+lon0 = float(s[3]) # s[0] and s[2] are empty spaces
 
 # set home position to (lon0, lat0, 0)
 self.set_home_position(lon0, lat0, 0)
@@ -73,7 +74,7 @@ In `planning_utils.py`, the following was added to `valid_actions()` function af
 ```
 
 ### Cull waypoints ###
-Collinearity test, `prune_path()`, was applied on the optained path to prune it from unnecessary waypoints.
+Collinearity test, `prune_path()`, was applied on the optained path to prune it from unnecessary waypoints that lies on the same line
 
 ```py
 def prune_path(path, epsilon=1e-5):
@@ -106,12 +107,8 @@ def prune_path(path, epsilon=1e-5):
 
 
 ## Execute the flight ##
-This is simply a check on whether it all worked. Send the waypoints and the autopilot should fly you from start to goal!
+To test the code, we tried starting points and destinations. The A* search was able to find a path if exist. Both resulting path ploted on the 2.5D map and the simulator execution for different senarios are shown below.  
 
-At the moment there is some mismatch between the colliders map and actual buildings in the scene. To ensure success build in a 5+ m safety margin around obstacles. Try some different goal locations. Also try starting from a different point in the city. Your reviewer will also try some random locations so be sure to test your solution! There is no firm constraint or requirement on how accurately you land exactly on the goal location. Just so long as your planner functions as expected.
-
-# Required Steps for a Passing Submission:
-1. Load the 2.5D map in the colliders.csv file describing the environment.
-6. Return waypoints in local ECEF coordinates (format for `self.all_waypoints` is [N, E, altitude, heading], where the drone’s start location corresponds to [0, 0, 0, 0].
+python motion_planning.py --lat_goal <lat> --lon_goal <lon> --alt_goal <alt>
 
 

@@ -4,6 +4,7 @@ import msgpack
 from enum import Enum, auto
 
 import numpy as np
+import re
 
 from planning_utils import a_star, heuristic, create_grid, prune_path
 from udacidrone import Drone
@@ -11,7 +12,6 @@ from udacidrone.connection import MavlinkConnection
 from udacidrone.messaging import MsgID
 from udacidrone.frame_utils import global_to_local
 
-import re
 
 class States(Enum):
     MANUAL = auto()
@@ -125,7 +125,8 @@ class MotionPlanning(Drone):
         header = open('colliders.csv').readline()
         s = re.findall(r"[-+]?\d*\.\d+|\d+", header)
         lat0 = float(s[1])
-        lon0 = float(s[2])
+        lon0 = float(s[3])
+        print(f'Home lat : {lat0}, lon : {lon0}')
 
         # TODO: set home position to (lon0, lat0, 0)
         self.set_home_position(lon0, lat0, 0)
