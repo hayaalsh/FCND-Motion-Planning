@@ -179,4 +179,50 @@ def a_star(grid, h, start, goal):
 def heuristic(position, goal_position):
     return np.linalg.norm(np.array(position) - np.array(goal_position))
 
+def onclick(event):
+    x = int(np.round(event.xdata))
+    y = int(np.round(event.ydata))
 
+    global coords
+    global grid_start
+    global grid_goal
+    coords.append((y, x))
+
+    if len(coords) == 1:
+        x, y = coords[0]
+        plt.plot(y, x, 'bo')
+        fig.canvas.draw()
+        grid_start = (x, y)
+        print('Select from the graph a destination point ...')
+
+    if len(coords) == 2:
+        fig.canvas.mpl_disconnect(cid)
+        x, y = coords[1]
+        plt.plot(y, x, 'r+')
+        fig.canvas.draw()
+        grid_goal = (x, y)
+        
+        # Run A* to find a path from start to goal
+        # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
+        print('Local Start and Goal: ', grid_start, grid_goal)
+        print('A* and path prunning ...')
+        path, _ = a_star(grid, planning_utils.heuristic, grid_start, grid_goal)
+        # TODO: prune path to minimize number of waypoints
+        path = prune_path(path)
+        print('Path Count: {len(path):3.0f}')
+
+        # plot path
+        print('Plotting the path ...')
+        waypoints = np.array([[p[0], p[1] , TARGET_ALTITUDE, 0] for p in path])
+        plt.plot( waypoints[:,1], waypoints[:, 0], 'b')
+        fig.canvas.draw()
+        
+        # Convert path to waypoints
+        waypoints = [[p[0] + north_offset, p[1] + east_offset, TARGET_ALTITUDE, 0] for p in path]
+        # Set self.waypoints
+        self.waypoints = waypoints
+        # TODO: send waypoints to sim (this is just for visualization of waypoints)
+        self.send_waypoints()
+
+        plt.close(1)
+    return 

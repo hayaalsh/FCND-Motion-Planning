@@ -2,7 +2,9 @@
 This is the readme for the python motion planning project for FCND course offered by Udacity. The file include all the rubric points and how they were addressed and specifically where in the code each step was handled.
 More details about the project devoloped by Udacity, contributors, and licensing, can be found [here](../master/README_Udacity.md).
 
-![Quad Image](./misc/enroute.png)
+<p align="center">
+<img src="misc/3_Haya.gif" width="700"/>
+</p>
 
 ## Starter Code ##
 
@@ -49,16 +51,8 @@ grid_start = (int(np.ceil(local_north - north_offset)), int(np.ceil(local_east -
 ```
 
 ### Set grid goal position from geodetic coords ###
-Goal position specified by the user through the command line was also converted from global to local frame and was mapped on the grid. 
-```py
-local_goal_north, local_goal_east, _ = global_to_local(self.global_goal_position, self.global_home)
-grid_goal = (int(np.ceil(local_goal_north - north_offset)), int(np.ceil(local_goal_east - east_offset)))
-```
-
-To run the code, you need to determin the goal position or else defult values of lat = ?, log = ?, alt = ? will be used.
-```
-python motion_planning.py --lat_goal <lat> --lon_goal <lon> --alt_goal <alt>
-```
+It is easier to provide the goal position in the grid, which we set it to (333,446) and can be transformed to the deodetic coords using `local_to_global()` after adding the offset.
+An allternative is to use function `motion_planning_select()` that I wrote to read user input on the map and choose it as a gole posion.
 
 ### A* search with diagonal motion ###
 In `planning_utils.py`, the following was added to `valid_actions()` function after adding new action to `Action()` enum class to include diagonal motions on the grid that have a cost of sqrt(2)
@@ -107,8 +101,24 @@ def prune_path(path, epsilon=1e-5):
 
 ---
 ## Execute the flight ##
-To test the code, we tried starting points and destinations. The A* search was able to find a path if exist. Both resulting path ploted on the 2.5D map and the simulator execution for different senarios are shown below.  
+To test the code, we tried starting points and destinations. The A* search was able to find a path if exist. Both resulting path ploted on the 2.5D map and the simulator execution for different senarios are shown below. I first used the original function `motion_planning()` and were I only define an endding position.
+<p align="center">
+<img src="misc/1_Haya.gif" width="500"/>
+</p>
 
-python motion_planning.py --lat_goal <lat> --lon_goal <lon> --alt_goal <alt>
+The other function is with some modification I made, `motion_planning_select()` were I select the start and end point from the 2.5D map. Note that the drone will have to travel to the start point to execute the path. Therefore, make sure to select a point that is feasiable and close to the starting point. Adittionally, make sure to not select the start and end point on top of each other to avoid error.
+<p align="center">
+<img src="misc/2_Haya" width="500"/>
+</p>
 
+## Video Documentation ##
+A short video of the drone using `motion_planning_select()` can be found
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/0T1lHZbxE9M&feature=youtu.be/0.jpg)](https://www.youtube.com/watch?v=0T1lHZbxE9M&feature=youtu.be)
 
+[![](http://img.youtube.com/vi/0T1lHZbxE9M/0.jpg)](http://www.youtube.com/watch?v=0T1lHZbxE9M "Planning FCND")
+
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/0T1lHZbxE9M?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
+" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
