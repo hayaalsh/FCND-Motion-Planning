@@ -3,7 +3,7 @@ This is the readme for the python motion planning project for FCND course offere
 More details about the project devoloped by Udacity, contributors, and licensing, can be found [here](../master/README_Udacity.md).
 
 <p align="center">
-<img src="misc/3_Haya.gif" width="700"/>
+<img src="misc/4_Haya.gif" width="700"/>
 </p>
 
 ## Starter Code ##
@@ -113,12 +113,4 @@ The other function is with some modification I made, `motion_planning_select()` 
 
 ## Video Documentation ##
 A short video of the drone using `motion_planning_select()` can be found
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/0T1lHZbxE9M&feature=youtu.be/0.jpg)](https://www.youtube.com/watch?v=0T1lHZbxE9M&feature=youtu.be)
-
 [![](http://img.youtube.com/vi/0T1lHZbxE9M/0.jpg)](http://www.youtube.com/watch?v=0T1lHZbxE9M "Planning FCND")
-
-<iframe width="1280" height="720" src="https://www.youtube.com/embed/0T1lHZbxE9M?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
