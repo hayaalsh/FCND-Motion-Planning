@@ -3,7 +3,7 @@ This is the readme for the python motion planning project for FCND course offere
 More details about the project devoloped by Udacity, contributors, and licensing, can be found [here](../master/README_Udacity.md).
 
 <p align="center">
-<img src="misc/4_Haya.gif" width="700"/>
+<img src="misc/4_Haya.gif" width="900"/>
 </p>
 
 ## Starter Code ##
@@ -103,12 +103,12 @@ def prune_path(path, epsilon=1e-5):
 ## Execute the flight ##
 To test the code, we tried starting points and destinations. The A* search was able to find a path if exist. Both resulting path ploted on the 2.5D map and the simulator execution for different senarios are shown below. I first used the original function `motion_planning()` and were I only define an endding position.
 <p align="center">
-<img src="misc/1_Haya.gif" width="500"/>
+<img src="misc/1_Haya.gif" width="700"/>
 </p>
 
 The other function is with some modification I made, `motion_planning_select()` were I select the start and end point from the 2.5D map. Note that the drone will have to travel to the start point to execute the path. Therefore, make sure to select a point that is feasiable and close to the starting point. Adittionally, make sure to not select the start and end point on top of each other to avoid error.
 <p align="center">
-<img src="misc/4_Haya" width="500"/>
+<img src="misc/4_Haya.gif" width="700"/>
 </p>
 
 ## Video Documentation ##
