@@ -125,7 +125,7 @@ class MotionPlanning(Drone):
         s = re.findall(r"[-+]?\d*\.\d+|\d+", header)
         lat0 = float(s[1])
         lon0 = float(s[3])
-        print(f'Home lat : {lat0}, lon : {lon0}')
+        #print(f'Home lat : {lat0}, lon : {lon0}')
 
         # TODO: set home position to (lon0, lat0, 0)
         self.set_home_position(lon0, lat0, 0)
