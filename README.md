@@ -108,9 +108,9 @@ To test the code, we tried starting points and destinations. The A* search was a
 
 The other function is with some modification I made, `motion_planning_select()` were I select the start and end point from the 2.5D map. Note that the drone will have to travel to the start point to execute the path. Therefore, make sure to select a point that is feasiable and close to the starting point. Adittionally, make sure to not select the start and end point on top of each other to avoid error.
 <p align="center">
-<img src="misc/2_Haya" width="500"/>
+<img src="misc/4_Haya" width="500"/>
 </p>
 
 ## Video Documentation ##
-A short video of the drone using `motion_planning_select()` can be found
+A short video of the drone using `motion_planning_select()` can be found below.
 [![](http://img.youtube.com/vi/0T1lHZbxE9M/0.jpg)](http://www.youtube.com/watch?v=0T1lHZbxE9M "Planning FCND")
