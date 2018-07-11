@@ -51,7 +51,10 @@ grid_start = (int(np.ceil(local_north - north_offset)), int(np.ceil(local_east -
 ```
 
 ### Set grid goal position from geodetic coords ###
-It is easier to provide the goal position in the grid, which we set it to (333,446) and can be transformed to the deodetic coords using `local_to_global()` after adding the offset.
+The desired goal can be entered in the deodeti coodrdiantes through the command line as follows, otherther wise the defult values of these paramters will be used.
+```
+python motion_planning.py --lon -122.39743738 --lat 37.79263316 --alt -5
+```    
 An allternative is to use function `motion_planning_select()` that I wrote to read user input on the map and choose it as a gole posion.
 
 ### A* search with diagonal motion ###
