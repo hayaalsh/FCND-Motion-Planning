@@ -1,4 +1,7 @@
 # FCND Project 2: Motion Planning #
+
+https://user-images.githubusercontent.com/22026004/145100220-d517aa19-aac8-466c-920c-f0cbb2942a33.mov
+
 This is the readme for the python motion planning project for FCND course offered by Udacity. The file include all the rubric points and how they were addressed and specifically where in the code each step was handled.
 More details about the project devoloped by Udacity, contributors, and licensing, can be found [here](../master/README_Udacity.md).
 
