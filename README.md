@@ -112,7 +112,3 @@ The other function is with some modification I made, `motion_planning_select()` 
 <p align="center">
 <img src="misc/4_Haya.gif" width="700"/>
 </p>
-
-## Video Documentation ##
-A short video of the drone using `motion_planning_select()` can be found below.
-[![](http://img.youtube.com/vi/0T1lHZbxE9M/0.jpg)](http://www.youtube.com/watch?v=0T1lHZbxE9M "Planning FCND")
